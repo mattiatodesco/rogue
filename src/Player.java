@@ -19,7 +19,12 @@ public class Player {
         this.passiveItems = new ArrayList<>();
     }
 
+    public double getFinalDamage() {
+        return finalDamage;
+    }
 
-
+    public double getFinalFireRate() {
+        return finalFireRate;
+    }
 
 }

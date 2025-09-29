@@ -7,4 +7,13 @@ public abstract class Item {
         this.damageMod = damageMod;
         this.fireMod = fireMod;
     }
+
+    public double getDamageMod() {
+        return damageMod;
+    }
+
+    public double getFireMod() {
+        return fireMod;
+    }
+
 }

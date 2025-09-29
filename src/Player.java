@@ -19,6 +19,25 @@ public class Player {
         this.passiveItems = new ArrayList<>();
     }
 
+    public void updateStats(){
+        finalDamage = baseDamage;
+        finalFireRate = baseFireRate;
+
+        if (activeItem != null){
+            finalDamage *= activeItem.getDamageMod();
+            finalFireRate *= activeItem.getFireMod();
+        }
+        if (trinket != null){
+            finalDamage *= trinket.getDamageMod();
+            finalFireRate *= trinket.getFireMod();
+        }
+        for(Passive p : passiveItems){
+                finalDamage *= p.getDamageMod();
+                finalFireRate *= p.getFireMod();
+        }
+
+    }
+
     public double getFinalDamage() {
         return finalDamage;
     }

@@ -23,7 +23,7 @@ public class Player {
         finalDamage = baseDamage;
         finalFireRate = baseFireRate;
 
-        if (activeItem != null){
+        if (activeItem != null && activeItem.isLoaded()){
             finalDamage *= activeItem.getDamageMod();
             finalFireRate *= activeItem.getFireMod();
         }
@@ -36,6 +36,33 @@ public class Player {
                 finalFireRate *= p.getFireMod();
         }
 
+    }
+
+    public void viewStats(){
+        System.out.println("Final Damage: " + finalDamage);
+        System.out.println("Final Fire Rate: " + finalFireRate);
+    }
+
+    public void addItem(Item nuovo){
+        if (nuovo instanceof Active)
+            this.activeItem = (Active) nuovo;
+        else if (nuovo instanceof Passive)
+            this.passiveItems.add((Passive) nuovo);
+        else if (nuovo instanceof Trinket)
+            this.trinket = (Trinket) nuovo;
+        
+    }
+
+    public void dropTrinket(){
+        this.trinket = null;
+    }
+
+    public boolean checkCollectibles(){
+        for (Collectible c : collectibles){
+            if (c instanceof Trinket)
+                collectibles.remove(c);
+        }
+        return true;
     }
 
     public double getFinalDamage() {

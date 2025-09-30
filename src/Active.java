@@ -8,7 +8,7 @@ public class Active extends Item{
     }
 
     public boolean isLoaded(){
-        return this.chargeLevel > MAX_CHARGE;
+        return this.chargeLevel == MAX_CHARGE;
     }
 
     public void reload(){

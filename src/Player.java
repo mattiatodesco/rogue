@@ -39,8 +39,7 @@ public class Player {
     }
 
     public void viewStats(){
-        System.out.println("Final Damage: " + finalDamage);
-        System.out.println("Final Fire Rate: " + finalFireRate);
+        System.out.printf("HP: %d | Final Fire Rate: %.2f | Final Damage: %.2f%n", hp, finalFireRate, finalDamage);
     }
 
     public void addItem(Item nuovo){
@@ -53,16 +52,21 @@ public class Player {
         
     }
 
-    public void dropTrinket(){
+    public Trinket dropTrinket(){
+        Trinket temp = this.trinket;
         this.trinket = null;
+        return temp;
     }
 
     public boolean checkCollectibles(){
-        for (Collectible c : collectibles){
-            if (c instanceof Trinket)
-                collectibles.remove(c);
+        boolean trovati = false;
+        for (int i = collectibles.size() - 1; i >= 0; i--) {
+            if (collectibles.get(i) instanceof Trinket) {
+                collectibles.remove(i);
+                trovati = true;
+            }
         }
-        return true;
+        return trovati;
     }
 
     public double getFinalDamage() {

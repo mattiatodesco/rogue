@@ -69,6 +69,49 @@ public class Player {
         return trovati;
     }
 
+    public boolean ricarica(){
+        Collectible temp = null;
+        for (Collectible c : collectibles){
+            if (c instanceof Battery){
+                temp = c;
+                break;
+            }
+        }
+        if (activeItem == null || activeItem.isLoaded() || temp == null ){
+            return false;
+        }
+
+        collectibles.remove(temp);
+        activeItem.reload();
+        return true;
+    }
+
+    public boolean cura(){
+        boolean healed = false;
+        if (hp == MAX_HP || hp <= 0)
+            return false;
+        
+        while (hp < MAX_HP){
+            boolean cuore = false;
+            int pos = 0;
+            for (int i = 0; i < collectibles.size(); i++){
+                if (collectibles.get(i) instanceof Heart){
+                        cuore = true;
+                        pos = i;
+                        break;
+                    }
+                }
+            
+            if (cuore){
+                hp++;
+                collectibles.remove(pos);  
+                healed = true;
+            }
+        }
+            return healed;
+        }
+        
+
     public double getFinalDamage() {
         return finalDamage;
     }

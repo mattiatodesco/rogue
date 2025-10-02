@@ -92,24 +92,19 @@ public class Player {
             return false;
         
         while (hp < MAX_HP){
-            boolean cuore = false;
             int pos = 0;
             for (int i = 0; i < collectibles.size(); i++){
                 if (collectibles.get(i) instanceof Heart){
-                        cuore = true;
                         pos = i;
+                        hp++;
+                        collectibles.remove(pos);  
+                        healed = true;
                         break;
                     }
                 }
-            
-            if (cuore){
-                hp++;
-                collectibles.remove(pos);  
-                healed = true;
-            }
         }
-            return healed;
-        }
+        return healed;
+    }
         
 
     public double getFinalDamage() {
